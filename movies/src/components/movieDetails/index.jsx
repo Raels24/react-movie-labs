@@ -64,23 +64,22 @@ const [drawerOpen, setDrawerOpen] = useState(false);
       </Paper>
 
        <Paper component="ul" sx={{ ...root }}>
-        <Chip
-          label="Production"
-          sx={{ ...chip }}
-          color="secondary"
-        />
-        {movie.production_countries && movie.production_countries.length > 0 ? (
-          movie.production_countries.map((c) => (
-            <li key={c.iso_3166_1}>
-              <Chip label={c.name} sx={{ ...chip }} />
-            </li>
-          ))
-        ) : (
-          <li>
-            <Chip label="N/A" sx={{ ...chip }} />
-          </li>
-        )}
-      </Paper>
+  <li>
+    <Chip label="Production countries" sx={{ ...chip }} color="secondary" />
+  </li>
+  {movie.production_countries && movie.production_countries.length > 0 ? (
+    movie.production_countries.map((country) => (
+      <li key={country.name}>
+        <Chip label={country.name} sx={{ ...chip }} />
+      </li>
+    ))
+  ) : (
+    <li>
+      <Chip label="N/A" sx={{ ...chip }} />
+    </li>
+  )}
+</Paper>
+
             <Fab
         color="secondary"
         variant="extended"
