@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/Raels24/react-movie-labs#readme",
   "dependencies": {
+    "@tanstack/react-query": "^5.90.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.90.2",
     "vite": "^7.1.9"
   }
 }
