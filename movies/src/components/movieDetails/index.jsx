@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import LanguageIcon from "@mui/icons-material/Language";
+
 
 
 
@@ -79,6 +81,16 @@ const [drawerOpen, setDrawerOpen] = useState(false);
     </li>
   )}
 </Paper>
+
+<Paper component="ul" sx={{ ...root }}>
+  <Chip
+    icon={<LanguageIcon />}
+    label={`Original Language: ${movie.original_language.toUpperCase()}`}
+    sx={{ ...chip }}
+    color="primary"
+  />
+</Paper>
+
 
             <Fab
         color="secondary"
