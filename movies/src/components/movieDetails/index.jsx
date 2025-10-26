@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
 import LanguageIcon from "@mui/icons-material/Language";
+import { useQuery } from "@tanstack/react-query";
+import { getMovieCredits } from "../../api/tmdb-api";
 
 
 
@@ -25,8 +27,13 @@ const root = {
 };
 const chip = { margin: 0.5 };
 
-const MovieDetails = ({ movie }) => {  // Don't miss this!
+const MovieDetails = ({ movie }) => {  
 const [drawerOpen, setDrawerOpen] = useState(false);
+
+const { data: credits } = useQuery({
+    queryKey: ["credits", { id: movie.id }],
+    queryFn: getMovieCredits,
+  });
 
 
   return (
@@ -90,6 +97,23 @@ const [drawerOpen, setDrawerOpen] = useState(false);
     color="primary"
   />
 </Paper>
+
+ {credits?.cast?.length && (
+  <Paper component="ul" sx={root}>
+    <li>
+      <Chip label="Cast" sx={chip} color="secondary" />
+    </li>
+    {credits.cast.slice(0, 10).map((member) => (
+      <li key={member.cast_id}>
+        <Chip label={member.name} sx={chip} />
+      </li>
+    ))}
+  </Paper>
+)}
+
+
+
+      
 
 
             <Fab
