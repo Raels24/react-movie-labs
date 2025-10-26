@@ -12,6 +12,8 @@ import MovieReviews from "../movieReviews"
 import LanguageIcon from "@mui/icons-material/Language";
 import { useQuery } from "@tanstack/react-query";
 import { getMovieCredits } from "../../api/tmdb-api";
+import { getMovieRecommendations } from "../../api/tmdb-api";
+
 
 
 
@@ -34,6 +36,12 @@ const { data: credits } = useQuery({
     queryKey: ["credits", { id: movie.id }],
     queryFn: getMovieCredits,
   });
+
+  const { data: recommendations } = useQuery({
+  queryKey: ["recommendations", { id: movie.id }],
+  queryFn: getMovieRecommendations,
+});
+
 
 
   return (
@@ -98,23 +106,40 @@ const { data: credits } = useQuery({
   />
 </Paper>
 
- {credits?.cast?.length && (
-  <Paper component="ul" sx={root}>
-    <li>
-      <Chip label="Cast" sx={chip} color="secondary" />
-    </li>
-    {credits.cast.slice(0, 10).map((member) => (
+<Paper component="ul" sx={{ ...root }}>
+  <li>
+    <Chip label="Cast" sx={{ ...chip }} color="secondary" />
+  </li>
+  {credits && credits.cast && credits.cast.length > 0 ? (
+    credits.cast.slice(0, 10).map((member) => (
       <li key={member.cast_id}>
-        <Chip label={member.name} sx={chip} />
+        <Chip label={member.name} sx={{ ...chip }} />
       </li>
-    ))}
-  </Paper>
-)}
+    ))
+  ) : (
+    <li>
+      <Chip label="N/A" sx={{ ...chip }} />
+    </li>
+  )}
+</Paper>
 
 
-
-      
-
+<Paper component="ul" sx={{ ...root }}>
+  <li>
+    <Chip label="Recommended Movies" sx={{ ...chip }} color="primary" />
+  </li>
+  {recommendations && recommendations.results && recommendations.results.length > 0 ? (
+    recommendations.results.slice(0, 5).map((rec) => (
+      <li key={rec.id}>
+        <Chip label={rec.title} sx={{ ...chip }} />
+      </li>
+    ))
+  ) : (
+    <li>
+      <Chip label="N/A" sx={{ ...chip }} />
+    </li>
+  )}
+</Paper>
 
             <Fab
         color="secondary"
