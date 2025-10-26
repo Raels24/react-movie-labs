@@ -12,6 +12,9 @@ import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../spinner';
+import Slider from "@mui/material/Slider";
+import Box from "@mui/material/Box";
+
 
 
 
@@ -97,6 +100,21 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+
+        <Box sx={{ ...formControl }}>
+  <Typography variant="h6" component="p">Minimum Rating</Typography>
+  <Slider
+    value={props.ratingFilter}
+    onChange={(e, newValue) => handleChange(e, "rating", newValue)}
+    valueLabelDisplay="auto"
+    step={1}
+    marks
+    min={0}
+    max={10}
+  />
+</Box>
+
+
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}
