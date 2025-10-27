@@ -14,6 +14,8 @@ import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import TrendingMoviesPage from "./pages/trendingMoviesPage";
 import TopRatedPage from "./pages/topRatedPage";
 import PopularMoviesPage from "./pages/popularMoviesPage";
+import theme from "./src/theme";
+import { ThemeProvider } from "@mui/material/styles";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,6 +32,7 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
       <BrowserRouter>
         <SiteHeader />
         <MoviesContextProvider>
@@ -47,11 +50,11 @@ const App = () => {
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
+      </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
-
 
 const rootElement = createRoot( document.getElementById("root") )
 rootElement.render(<App />);

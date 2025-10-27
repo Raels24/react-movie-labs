@@ -63,7 +63,10 @@ export default function FilterMoviesCard(props) {
   return (
     <Card 
       sx={{
-        backgroundColor: "rgb(204, 204, 0)"
+        backgroundColor: "background.paper",
+        color: "text.primary",
+        borderRadius: 2,
+        boxShadow: 3,
       }} 
       variant="outlined">
       <CardContent>
@@ -82,7 +85,7 @@ export default function FilterMoviesCard(props) {
     />
 
         <FormControl sx={{...formControl}}>
-          <InputLabel id="genre-label">Genre</InputLabel>
+          <InputLabel id="genre-label" sx={{ color: "text.primary" }}>Genre</InputLabel>
             <Select
     labelId="genre-label"
     id="genre-select"
@@ -102,7 +105,7 @@ export default function FilterMoviesCard(props) {
         </FormControl>
 
         <Box sx={{ ...formControl }}>
-  <Typography variant="h6" component="p">Minimum Rating</Typography>
+  <Typography variant="h6" component="p" sx={{ color: "primary.main" }}>Minimum Rating</Typography>
   <Slider
     value={props.ratingFilter}
     onChange={(e, newValue) => handleChange(e, "rating", newValue)}
