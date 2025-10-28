@@ -13,6 +13,7 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [ratingFilter, setRatingFilter] = useState(0);
   const [page, setPage] = useState(1);
   const moviesPerPage = 10;
+  const [sortOrder, setSortOrder] = useState("none");
 
   //filtering movies based on user input
   let displayedMovies = movies
@@ -26,6 +27,13 @@ function MovieListPageTemplate({ movies, title, action }) {
       return m.vote_average >= ratingFilter;
     });
 
+  //sorting movies based on user input
+  if (sortOrder === "rating-desc") {
+    displayedMovies.sort((a, b) => b.vote_average - a.vote_average);
+  } else if (sortOrder === "rating-asc") {
+    displayedMovies.sort((a, b) => a.vote_average - b.vote_average);
+  }
+
     //pagination logic
   const pageCount = Math.ceil(displayedMovies.length / moviesPerPage);
   const startIndex = (page - 1) * moviesPerPage;
@@ -38,6 +46,7 @@ function MovieListPageTemplate({ movies, title, action }) {
   if (type === "name") setNameFilter(value);
   else if (type === "genre") setGenreFilter(value);
   else if (type === "rating") setRatingFilter(value);
+  else if (type === "sort") setSortOrder(value);
 };
 
 const handlePageChange = (event, value) => {
@@ -62,6 +71,7 @@ const handlePageChange = (event, value) => {
             titleFilter={nameFilter}
             genreFilter={genreFilter}
             ratingFilter={ratingFilter}
+            sortOrder={sortOrder}
           />
         </Grid>
 

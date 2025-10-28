@@ -93,7 +93,7 @@ export default function FilterMoviesCard(props) {
     value={props.genreFilter}
     onChange={handleGenreChange}
   >
-
+    
             {genres.map((genre) => {
               return (
                 <MenuItem key={genre.id} value={genre.id}>
@@ -101,6 +101,21 @@ export default function FilterMoviesCard(props) {
                 </MenuItem>
               );
             })}
+          </Select>
+        </FormControl>
+
+        <FormControl sx={{...formControl}}>
+          <InputLabel id="sort-label" sx={{ color: "primary" }}>Sort By</InputLabel>
+          <Select
+            labelId="sort-label"
+            id="sort-select"
+            defaultValue=""
+            value={props.sortOrder}
+            onChange={(e) => handleChange(e, "sort", e.target.value)}
+          >
+            <MenuItem value="none">None</MenuItem>
+            <MenuItem value="rating-desc">Rating: High to Low</MenuItem>
+            <MenuItem value="rating-asc">Rating: Low to High</MenuItem>
           </Select>
         </FormControl>
 
