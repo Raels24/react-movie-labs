@@ -4,7 +4,7 @@ const theme = createTheme({
   palette: {
     mode: "dark",
     primary: { main: "#1397e4ff" }, 
-    secondary: { main: "#000000ff" },
+    secondary: { main: "#ffffffff" },
     background: {
       default: "#000000ff",
       paper: "#000000ff",
@@ -24,6 +24,11 @@ const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: { backgroundColor: "#1397e4ff" },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: { color: "black" },
       },
     },
   },
