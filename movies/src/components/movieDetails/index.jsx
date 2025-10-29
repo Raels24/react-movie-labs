@@ -13,6 +13,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import { useQuery } from "@tanstack/react-query";
 import { getMovieCredits } from "../../api/tmdb-api";
 import { getMovieRecommendations } from "../../api/tmdb-api";
+import { getMovieVideos } from "../../api/tmdb-api";
 
 
 
@@ -37,9 +38,14 @@ const { data: credits } = useQuery({
     queryFn: getMovieCredits,
   });
 
-  const { data: recommendations } = useQuery({
-  queryKey: ["recommendations", { id: movie.id }],
-  queryFn: getMovieRecommendations,
+const { data: recommendations } = useQuery({
+    queryKey: ["recommendations", { id: movie.id }],
+    queryFn: getMovieRecommendations,
+});
+
+const { data: videos } = useQuery({
+    queryKey: ["videos", { id: movie.id }],
+    queryFn: getMovieVideos,
 });
 
 
@@ -122,6 +128,21 @@ const { data: credits } = useQuery({
     </li>
   )}
 </Paper>
+
+<Paper component="div" sx={{ ...root, flexDirection: "column", alignItems: "center" }}>
+    {videos && videos.results && videos.results.length > 0 && videos.results
+      .filter((v) => v.site === "YouTube" && v.type === "Trailer")
+      .slice(0, 1)
+      .map((trailer) => (
+        <iframe
+          key={trailer.id}
+          width="500"
+          height="300"
+          src={`https://www.youtube.com/embed/${trailer.key}`}
+          allowFullScreen
+        />
+      ))}
+  </Paper>
 
 
 <Paper component="ul" sx={{ ...root }}>
