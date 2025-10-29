@@ -94,6 +94,11 @@ const SiteHeader = () => {
                     key={opt.label}
                     color="inherit"
                     onClick={() => handleMenuSelect(opt.path)}
+                    sx={{ fontSize: "1.2rem",
+                              marginLeft: "1rem",
+                              textTransform: "none",
+                              fontWeight: "bold"
+                            }}
                   >
                     {opt.label}
                   </Button>
